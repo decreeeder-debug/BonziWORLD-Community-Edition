@@ -59,7 +59,11 @@ var videoIdsCommercials = [
   "https://www.youtube.com/watch?v=3rvFiHa6rJk",
   "https://www.youtube.com/watch?v=DSYiXCEWsVc",
   "https://www.youtube.com/watch?v=AykkOSaLphY",
-  "https://www.youtube.com/watch?v=liqetY2e7a8"
+  "https://www.youtube.com/watch?v=liqetY2e7a8",
+  "https://www.youtube.com/watch?v=NqFfHPleTHY",
+  "https://www.youtube.com/watch?v=M9VJDQZq7ZE",
+  "https://www.youtube.com/watch?v=6zL2ZN10LYc",
+  "https://www.youtube.com/watch?v=eq0817IPBbY"
 ]
 var videoIds4PM2430PM = [
   "https://www.youtube.com/watch?v=n_sWTHQKr-s",
