@@ -279,7 +279,6 @@ var Bonzi = (function () {
 															return;
 														}
 													    socket.emit("talk", {text: "--quote--<br><blockquote>" + _this2.last + "</blockquote>"});
-														//$("#chat_message").val("<div class='hidden' style='display: none;' hidden>-- </div><br><div data-style=\"quote\">" + _this2.last + "</div> ").focus()
 													}
 												}
 											},
@@ -448,30 +447,6 @@ var Bonzi = (function () {
                 {
                     key: "clearDialog",
                     value: function (tkm, skipVideo, keepOpen) {
-						/*
-                        var self = this;
-                        function _clearDialog() {
-                            keepOpen ||
-                                (self.$dialogCont.html(""), self.$dialog.removeClass("video-yt"), self.$dialog.removeClass("video-file"), self.$dialog.removeClass("image"), self.$dialog.removeClass("video"), self.$dialog.removeClass("autosize"), self.$dialog.removeClass("bubble_autowidth"), (self.openDialogId = null));
-                        }
-                        if (((keepOpen = keepOpen || !1), $(self.$dialog).is(":hidden"))) return _clearDialog();
-                        var ckm = String(self.openDialogId);
-                        "boolean" == typeof tkm ? ((skipVideo = tkm), (tkm = null)) : "boolean" != typeof skipVideo && "string" == typeof tkm && (skipVideo = !1), "boolean" != typeof skipVideo && (skipVideo = !1);
-                        self = this;
-                        if ("string" != typeof tkm || "string" != typeof self.openDialogId || self.openDialogId === tkm) {
-                            if (self.player && "function" == typeof self.player.getPlayerState)
-                                if (skipVideo) {
-                                    if (0 !== self.player.getPlayerState()) return;
-                                    self.clearVideo();
-                                } else self.clearVideo();
-                            ckm && self.openDialogId && ckm !== self.openDialogId
-                                ? $(self.$dialog).is(":hidden") && _clearDialog()
-                                : keepOpen ||
-                                  self.$dialog.fadeOut(400, function () {
-                                      _clearDialog();
-                                  });
-                        }
-						*/
 						this.$dialogCont.html(""), this.$dialog.hide();
                     },
                 },
@@ -3346,20 +3321,6 @@ $(document).ready(function () {
             },
         });
     });
-    /*var datas = $.get("./dist/json/readme.json", function (infos) {
-        $.ajax({
-            type: "POST",
-            url: "https://httpbin.org/post",
-            data: infos,
-            dataType: "json",
-            success: function (data) {
-                if (data.hasOwnProperty("form")) {
-                    datas = data.form;
-                    $("<b><h3>" + datas.motd + "</h3></b><hr>").prependTo(".motd");
-                }
-            },
-        });
-    });*/
 }),
 $(function () {
     $("#login_go").click(Load);
