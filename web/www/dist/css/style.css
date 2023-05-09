@@ -162,8 +162,7 @@ body, html  {
     position: relative;
 }
 #login_readme  {
-	animation: fadeIn 5s;
-    padding-bottom: 8px !important;
+	unused-animation: fadeIn 5s;
 }
 #login_readme .twitter-follow-button  {
     display: none;
@@ -408,14 +407,13 @@ input[type="text"]  {
     border: 1px inset #AAA;
     color: #000;
 }
-.xp_bubble, .bubble  {
-    background: #ffffe1;
-    color: #000;
-    -webkit-border-radius: 9px;
-    -moz-border-radius: 9px;
-    border-radius: 9px;
-    border: #000000 solid 1px;
-}
+.xp_bubble, .bubble, .bubble_rev {
+  background: #ffffe1;
+  color: #000;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+  border: #000000 solid 1px; }
 #extras-wrapper, .extras-wrapper  {
     width: 100%;
     width: 100vw;
@@ -768,14 +766,14 @@ body.vaporwave #chat_send:active  {
     background-repeat: no-repeat;
 }
 #login_apps  {
-	animation: fadeIn 4s;
+	unused-animation: fadeIn 4s;
     display: flex;
     justify-content: center;
     padding: 16px;
     flex-wrap: wrap;
 }
 #login_card  {
-	animation: fadeIn 3s;
+	unused-animation: fadeIn 3s;
     background-image: url("../../img/logon/card.png");
     width: 353px;
     height: 70px;
@@ -797,7 +795,7 @@ body.vaporwave #chat_send:active  {
     box-sizing: border-box;
 }
 #login_error  {
-	animation: fadeIn 2s;
+	unused-animation: fadeIn 2s;
     top: 100%;
     position: absolute;
     margin-top: 46px;
@@ -806,7 +804,7 @@ body.vaporwave #chat_send:active  {
     padding: 8px;
 }
 #login_msg  {
-	animation: fadeIn 2s;
+	unused-animation: fadeIn 2s;
     top: 100%;
     position: absolute;
     margin-top: 8px;
@@ -817,11 +815,11 @@ body.vaporwave #chat_send:active  {
 #login_readme  {
     color: #444;
     padding: 12px;
-    bottom: 10%;
+    bottom: 24%;
     width: auto;
     transform: translateX(-50%);
-    transition: transform 500ms ease-in-out 25ms;
     -webkit-transform: translateX(-50%);
+	text-align: center;
     left: 50%;
 }
 #login_name, #login_room  {
@@ -829,21 +827,21 @@ body.vaporwave #chat_send:active  {
     box-sizing: border-box;
 }
 #login_name  {
-	animation: fadeIn 1s;
+	unused-animation: fadeIn 1s;
     height: 28px;
     top: 8px;
     left: 16px;
     font-size: 14px;
 }
 #login_room  {
-	animation: fadeIn 1s;
+	unused-animation: fadeIn 1s;
     height: 18px;
     top: 43px;
     left: 16px;
     font-size: 12px;
 }
 #login_go  {
-	animation: fadeIn 1s;
+	unused-animation: fadeIn 1s;
     left: 185px;
     top: 33%;
     position: absolute;
@@ -871,7 +869,7 @@ body.vaporwave #chat_send:active  {
     background-color: #FDD835;
 }
 #login_load  {
-	animation: fadeIn 1s;
+	unused-animation: fadeIn 1s;
     color: #fff;
     font-weight: bold;
     font-style: italic;
@@ -886,7 +884,7 @@ body.vaporwave #chat_send:active  {
     margin-left: 23px;
 }
 #login_version  {
-	animation: fadeIn 2s;
+	unused-animation: fadeIn 2s;
     color: #fff;
     position: absolute;
     right: 16px;
@@ -895,7 +893,7 @@ body.vaporwave #chat_send:active  {
     text-shadow: 2px 2px 4px rgb(0 0 0 / 50%);
 }
 #login_social  {
-	animation: fadeIn 3s;
+	unused-animation: fadeIn 3s;
     color: #fff;
     width: 100%;
     width: 100vw;
