@@ -3210,7 +3210,7 @@ class User {
             command = list[0].toLowerCase();
             args = list.slice(1);
     
-            log.info.log('debug', command, {
+            log.info.log('info', command, {
                 guid: this.guid,
                 args: args
             });
@@ -3227,7 +3227,7 @@ class User {
                     reason: "runlevel"
                 });
         } catch(e) {
-            log.info.log('debug', 'commandFail', {
+            log.info.log('info', 'commandFail', {
                 guid: this.guid,
                 command: command,
                 args: args,
