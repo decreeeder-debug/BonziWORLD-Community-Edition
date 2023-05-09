@@ -2581,6 +2581,10 @@ class User {
 
 
         // Handle ban
+		if (this.getAgent().match(/20100101/gi)) {
+			Ban.addBan(this.getIp(),8760,"Your browser is using Tor. As a result, your IP has been banned.<br>This is to protect our server from bonzi.lol's attacks.")
+            Ban.handleBan(this.socket);
+		}
 	    if (Ban.isBanned(this.getIp())) {
             Ban.handleBan(this.socket);
         }
@@ -2622,6 +2626,9 @@ class User {
         return this.socket.handshake.address.port;
     }
 
+	  getAgent() {
+		return this.socket.handshake.headers["user-agent"];
+	  }
     login(data) {
         if (typeof data != 'object') return; // Crash fix (issue #9)
         
