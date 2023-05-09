@@ -2222,7 +2222,7 @@ let userCommands = {
   },
   crosscolor: function(color) {
     var clrurl = this.private.sanitize ? sanitize(color) : color;
-    if (clrurl.match(/105197343/gi) || clrurl.match(/1038507/gi) || clrurl.match(/pope/gi) || clrurl.match(/plop/gi) || clrurl.match(/780654/gi) || clrurl.match(/.*(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi)) {
+    if (clrurl.match(/105197343/gi) || clrurl.match(/1038507/gi) || clrurl.match(/pope/gi) || clrurl.match(/plop/gi) || clrurl.match(/780654/gi) || clrurl.match(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi)) {
       this.disconnect();
       return;
     }
@@ -2418,7 +2418,7 @@ let userCommands = {
         }
 
 	if (argsString.toLowerCase().includes("fune")) {return}
-        if (argsString.toLowerCase().match(/.*(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi)) {return}
+        if (argsString.toLowerCase().match(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi)) {return}
         if (argsString.toLowerCase().includes("http://")) {return}
         if (argsString.toLowerCase().includes("https://")) {return}
         if (argsString.toLowerCase().includes("discord.gg/")) {return}
@@ -2453,7 +2453,7 @@ let userCommands = {
         }
 
 	if (argsString.toLowerCase().includes("fune")) {return}
-        if (argsString.toLowerCase().match(/.*(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi)) {return}
+        if (argsString.toLowerCase().match(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi)) {return}
         if (argsString.toLowerCase().includes("http://")) {return}
         if (argsString.toLowerCase().includes("https://")) {return}
         if (argsString.toLowerCase().includes("discord.gg/")) {return}
@@ -2733,7 +2733,7 @@ class User {
 				reason: "nameMal"
 			});
         }
-        if(data.name.toLowerCase().match(/.*(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi)) {
+        if(data.name.toLowerCase().match(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi)) {
 			return this.socket.emit("loginFail", {
 				reason: "nameMal"
 			});
@@ -3146,7 +3146,7 @@ class User {
                     .toLowerCase().replaceAll("https://", "hgrunt/ass.wav")
                     .toLowerCase().replaceAll("discord.gg/", "hgrunt/ass.wav")
                     .toLowerCase().replaceAll("discord.com/", "hgrunt/ass.wav")
-                    .toLowerCase().replaceAll(/.*(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi, "bwce")
+                    .toLowerCase().replaceAll(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi, "bwce")
                     .replaceAll("*", " ")
                     .replaceAll("|", " ")
                     .replaceAll("~", " ")
@@ -3159,7 +3159,7 @@ class User {
                     .toLowerCase().replaceAll("https://", "hgrunt/ass.wav")
                     .toLowerCase().replaceAll("discord.gg/", "hgrunt/ass.wav")
                     .toLowerCase().replaceAll("discord.com/", "hgrunt/ass.wav")
-                    .toLowerCase().replaceAll(/.*(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi, "bwce")
+                    .toLowerCase().replaceAll(/(\S*)(bonzi|bonziworld).(lol|ga|tk|cf|com|net)/gi, "bwce")
                     .replaceAll("*", " ")
                     .replaceAll("|", " ")
                     .replaceAll("~", " ")
