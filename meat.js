@@ -1,13 +1,13 @@
-// Code by ItzCrazyScout, CosmicStar98 and 'HOST'
-// Private :-)
-
-
-
 // cosmic fucking broke bonzitv
-
-// will soon move bonzitv's video lists inside this javascript file to declutter meat.js
+// how??????? explain???? *visible confusion*
 
 // go behh yourself
+
+
+// Monkey-patch js string to allow checking empty strings
+String.prototype.isEmpty = function() {
+    return (this.length === 0 || !this.trim());
+};
 
 var bonziTvCommercialMode = false;
 var bonziTvCool = false;
@@ -2407,6 +2407,9 @@ let userCommands = {
         if (argsString.includes("{ROOM}")) {
             argsString = sanitizeHTML2(this.room.rid.slice(0,16));
         }
+        if (argsString.includes("{VOICE}")) {
+            argsString = this.public.voice;
+        }
         if (argsString.includes("'")) {
             return;
         }
@@ -2440,6 +2443,9 @@ let userCommands = {
         }
         if (argsString.includes("{ROOM}")) {
             argsString = sanitizeHTML2(this.room.rid.slice(0,16));
+        }
+        if (argsString.includes("{VOICE}")) {
+            argsString = this.public.voice;
         }
         if (argsString.includes("\"")) {
             return;
@@ -3138,39 +3144,45 @@ class User {
                     .replaceAll("@", "%")
                     .replaceAll("`", "\u200B")
                     .replaceAll(" ", "\u200B ")
-                    .replaceAll("http://", "hgrunt/ass.wav")
-                    .replaceAll("https://", "hgrunt/ass.wav")
-                    .replaceAll("discord.gg/", "hgrunt/ass.wav")
-                    .replaceAll("discord.com/", "hgrunt/ass.wav")
-                    .replaceAll("bonzi.lol", "bwe")
-                    .replaceAll("bonzi.ga", "bwe")
+                    .toLowerCase().replaceAll("http://", "hgrunt/ass.wav")
+                    .toLowerCase().replaceAll("https://", "hgrunt/ass.wav")
+                    .toLowerCase().replaceAll("discord.gg/", "hgrunt/ass.wav")
+                    .toLowerCase().replaceAll("discord.com/", "hgrunt/ass.wav")
+                    .toLowerCase().replaceAll("bonzi.lol", "bwce")
+                    .toLowerCase().replaceAll("bonzi.ga", "bwce")
+                    .toLowerCase().replaceAll("bonziworld.lol", "bwce")
+                    .toLowerCase().replaceAll("bonziworld.ga", "bwce")
                     .replaceAll("*", " ")
                     .replaceAll("|", " ")
                     .replaceAll("~", " ")
+                    .replaceAll("{ROOM}", " ")
                 var txt = text
                     .replaceAll("@", "%")
                     .replaceAll("`", "\u200B")
                     .replaceAll(" ", "\u200B ")
-                    .replaceAll("http://", "hgrunt/ass.wav")
-                    .replaceAll("https://", "hgrunt/ass.wav")
-                    .replaceAll("discord.gg/", "hgrunt/ass.wav")
-                    .replaceAll("discord.com/", "hgrunt/ass.wav")
-                    .replaceAll("bonzi.lol", "bwe")
-                    .replaceAll("bonzi.ga", "bwe")
+                    .toLowerCase().replaceAll("http://", "hgrunt/ass.wav")
+                    .toLowerCase().replaceAll("https://", "hgrunt/ass.wav")
+                    .toLowerCase().replaceAll("discord.gg/", "hgrunt/ass.wav")
+                    .toLowerCase().replaceAll("discord.com/", "hgrunt/ass.wav")
+                    .toLowerCase().replaceAll("bonzi.lol", "bwce")
+                    .toLowerCase().replaceAll("bonzi.ga", "bwce")
+                    .toLowerCase().replaceAll("bonziworld.lol", "bwce")
+                    .toLowerCase().replaceAll("bonziworld.ga", "bwce")
                     .replaceAll("*", " ")
                     .replaceAll("|", " ")
                     .replaceAll("~", " ")
                     .replaceAll("{NAME}", this.public.name)
                     .replaceAll("{ROOM}", this.room.rid)
                     .replaceAll("{COLOR}", this.public.color)
+                    .replaceAll("{VOICE}", this.public.voice)
                 const IMAGE_URL = "https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/" + this.public.color + ".png";
                 hook.setUsername(this.public.name + " | " + "Room ID: " + rid);
                 hook.setAvatar(IMAGE_URL);
                 if (this.private.runlevel < 3) {
                     txt = txt.replaceAll("<", "!").replaceAll(">", "$");
                 }
-				if (hook != " ") {
-					//hook.send(txt);
+				if (hook || hook.isEmpty() != true) {
+					hook.send(txt);
 				}
             } catch (err) {
                 console.log("WTF?: " + err.stack);
