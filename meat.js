@@ -2614,7 +2614,8 @@ class User {
 
         log.access.log('info', 'connect', {
             guid: this.guid,
-            ip: this.getIp()
+            ip: this.getIp(),
+			useragent: this.getAgent(),
         });
 
         if (this.getIp() == "::1" || this.getIp() == "::ffff:127.0.0.1" || Ban.isIn(this.getIp())) {
