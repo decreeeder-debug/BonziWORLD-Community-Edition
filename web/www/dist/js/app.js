@@ -1,5 +1,5 @@
 /*!
-  * Application : bonziworld-enhanced
+  * Application : bonziworld-ce
   * Version     : v3.4.61_7700a6b_2021-11-03T17:30:42+00:00
   * Built       : 2021-11-03
   * Environment : production-web
@@ -73,25 +73,6 @@ $(document).ready(function () {
     });
 });
 
-function actuallyCreateAccount() {
-    return $("#wiz_name").val().match(/Seamus/gi) || $("#wiz_name").val().match(/Cosmic/gi) ? ($("#page_irregularity2").show(), void socket.disconnect(), console.error("BonziWORLD will not operate when pretending to become an admin nor will it operate when impersonating an admin.\nPlease read the rules for more information.")) : $("#wiz_guid").val().match(/Seamus/gi) || $("#wiz_guid").val().match(/Cosmic/gi) ? ($("#page_irregularity2").show(), void socket.disconnect(), console.error("BonziWORLD will not operate when pretending to become an admin nor will it operate when impersonating an admin.\nPlease read the rules for more information.")) : (socket.emit("createAccount", {
-        name: $("#wiz_name").val(),
-        guid: $("#wiz_guid").val()
-    }), $("#page_accountWizard").hide(), void alert("Successfully registered! Please reload for the special features to take effect..."), console.info("Successfully registered! Please reload for the special features to take effect..."))
-}
-
-function createAccount() {
-    $("#page_accountWizard").show()
-}
-
-function hideaboutme() {
-    $("#page_aboutme").hide()
-}
-
-function copyBonziID(BonziID) {
-    return "https:" !== location.protocol ? (void alert("This function does not work on insecure mode.\nPlease switch to HTTPS."), console.error("This function does not work on insecure mode.\nPlease switch to HTTPS.")) : void navigator.clipboard.writeText(BonziID)
-}
-
 
 const savedDefault = {
 	blockedNames: [],
@@ -113,14 +94,6 @@ const savedDefault = {
 			name: "Use ESpeak",
 			value: false,
 		},
-		/*images: {
-			name: "Show Images",
-			value: true,
-		},
-		videos: {
-			name: "Show Videos",
-			value: true,
-		},*/
 		expiremental: {
 			name: "Expiremental Mode",
 			value: false,
@@ -133,31 +106,6 @@ setInterval(function () {
 	localStorage.setItem("saved_options", JSON.stringify(saved));
 }, 1000);
 const settings = saved.settings;
-
-/*if (settings.audio.value === false) {
-	try {
-		setInterval(function () {document.getElementById("bw_audios").innerHTML = "<p class='no_selection'>You have audios disabled...</p>"}, 1000);
-	}
-	catch(err) {
-		
-	}	
-}
-if (settings.images.value === false) {
-	try {
-		setInterval(function () {document.getElementById("bw_image").innerHTML = "<p class='no_selection'>You have images disabled...</p>"}, 1000);
-	}
-	catch(err) {
-		
-	}	
-}
-if (settings.videos.value === false) {
-	try {
-		setInterval(function () {document.getElementById("bw_video").innerHTML = "<p class='no_selection'>You have videos disabled...</p>"}, 1000);
-	}
-	catch(err) {
-		
-	}	
-}*/
 
 ("use strict");
 var _createClass = (function () {
@@ -311,13 +259,6 @@ var Bonzi = (function () {
 													}
 												}
 											},
-											/*aboutme: {
-												name: "See About Me",
-												callback: function() {
-													var about = _this2.userPublic.aboutme;
-													typeof about == undefined && (about = '<img class="no_selection" src="./img/icons/1.png" draggable=false; width=32> This user has not setup their About Me.'), $("#page_aboutme").show(), $("#aboutme_cont").html("<h1>" + _this2.userPublic.name + "</h1><br>" + about + "<br><br><button class='btn no_selection' onclick='javascript:hideaboutme()'>Close</button> <button class='btn no_selection' onclick='javascript:copyBonziID(\"" + _this2.id + "\")'>Copy Bonzi ID</button>")
-												}
-											},*/
 											dm: {
 												name: "Send Direct Message",
 												callback: function () {
@@ -337,7 +278,7 @@ var Bonzi = (function () {
 															bonziAlert("This person hasnt speaked yet")
 															return;
 														}
-														$("#chat_message").val("--<br><blockquote>" + _this2.last + "</blockquote> ").focus()
+													    socket.emit("talk", {text: "--quote--<br><blockquote>" + _this2.last + "</blockquote>"});
 														//$("#chat_message").val("<div class='hidden' style='display: none;' hidden>-- </div><br><div data-style=\"quote\">" + _this2.last + "</div> ").focus()
 													}
 												}
@@ -692,10 +633,6 @@ var Bonzi = (function () {
 							let hex="#AB47BC";
 							if(color=="purple"){return"#AB47BC"}else if(color=="magenta"){return"#FF00FF"}else if(color=="pink"){return"#F43475"}else if(color=="blue"){return"#3865FF"}else if(color=="cyan"){return"#00ffff"}else if(color=="red"){return"#f44336"}else if(color=="orange"){return"#FF7A05"}else if(color=="green"){return"#4CAF50"}else if(color=="lime"){return"#55FF11"}else if(color=="yellow"){return"#F1E11E"}else if(color=="brown"){return"#CD853F"}else if(color=="black"){return"#424242"}else if(color=="grey"){return"#828282"}else if(color=="white"){return"#EAEAEA"}else if(color=="ghost"){return"#D77BE7"}else{return hex}
 						}
-                        if(settings.notifications.value === true && LoggedIn === true) {try {new Notification("Room ID: " + Room_ID, { body: date + " | " + this.userPublic.name + ": " + text, icon: "./img/agents/__closeup/" + this.userPublic.color + ".png" })} catch {}};
-						var toscroll = document.getElementById("chat_log_list").scrollHeight - document.getElementById("chat_log_list").scrollTop < 605;
-						document.getElementById("chat_log_list").innerHTML += "<ul><li class=\"bonzi-message cl-msg ng-scope bonzi-event\" id=\"cl-msg-"+self.id+"\"><span class=\"timestamp ng-binding\"><small style=\"font-size:11px;font-weight:normal;\">"+date+"</small></span> <span class=\"sep tn-sep\"> | </span><span class=\"bonzi-name ng-isolate-scope\"><span class=\"event-source ng-binding ng-scope\"><font color='"+getBonziHEXColor(this.userPublic.color)+"'>"+this.userPublic.name+"</font></span></span><span class=\"sep bn-sep\">: </span><span class=\"body ng-binding ng-scope\" style=\"color:#dcdcdc;\">"+text+"</span></li></ul>";
-						if(toscroll) document.getElementById("chat_log_list").scrollTop = document.getElementById("chat_log_list").scrollHeight;
 							var _this3 = this;
 							this.usingYTAlready = false;
 							(allowHtml = allowHtml || !1),
@@ -703,8 +640,11 @@ var Bonzi = (function () {
                             (say = void 0 !== say ? replaceAll((say = replaceAll(say, "{NAME}", this.userPublic.name)), "{COLOR}", this.color) : text.replace("&gt;", "").replace(/~/gi,"?"));
 							var greentext = "&gt;" == (text = linkify(text)).substring(0, 4) || ">" == text[0];
 
-							(say=say.replace(/{ROOM}/gi,Room_ID));(text=text.replace(/{ROOM}/gi,Room_ID));(say=say.replace(/~/gi,"?"));(say=say.replace(/bonzi.ga/gi,window.location.host));(say=say.replace(/bonzi.lol/gi,window.location.host));(say=say.replace(/bonziworld.lol/gi,window.location.host));(text=text.replace(/bonzi.ga/gi,window.location.host));(text=text.replace(/bonzi.lol/gi,window.location.host));(text=text.replace(/bonziworld.lol/gi,window.location.host));(text=text.replace(/'/gi,"&apos;"));(text=text.replace(/"/gi,"&quot;"));(text=text.replace(/#/gi,"&num;"));(say=say.replace(/bzw/gi,"bonziworld"));(say=say.replace(/bwe/gi,"bonziworld enhanced"));(say=say.replace(/bwr/gi,"bonziworld revived"));(say=say.replace(/bwce/gi,"bonziworld community edition"));(say=say.replace(/&amp;/gi,"and"));(say=say.replace(/&num;/gi,"hash tag"));(say=say.replace(/&gt;/gi,"greater than"));(say=say.replace(/&lt;/gi,"less than"));(say=say.replace(/&gt/gi,"greater than"));(say=say.replace(/&lt/gi,"less than"));(say=say.replace(/TTS/g,"text to speech"));(say=say.replace(/tts/g,"text to speech"));(say=say.replace(/wdym/gi,"what do you mean"));(say=say.replace(/idc/gi,"i don't care"));(say=say.replace(/idk/gi,"i don't know"));(say=say.replace(/btw/gi,"by the way"));(say=say.replace(/idfc/gi,"i don't fucking care"));(say=say.replace(/idfk/gi,"i don't fucking know"));(say=say.replace(/idgaf/gi,"i don't give a fuck"));(say=say.replace(/wtf/gi,"what the fuck"));(say=say.replace(/wth/gi,"what the hell"));(say=say.replace(/lmao/gi,"laughing my ass off"));(say=say.replace(/lmfao/gi,"laughing my fucking ass off"));(say=say.replace(/afaik/gi,"as far as i know"));(say=say.replace(/iirc/gi,"if i remember correctly"));(say=say.replace(/PST/g,"pacific standard time"));(say=say.replace(/MST/g,"mountain standard time"));(say=say.replace(/CST/g,"central standard time"));(say=say.replace(/EST/g,"eastern standard time"));(say=say.replace(/AST/g,"alantic standard time"));(say=say.replace(/PDT/g,"pacific daylight time"));(say=say.replace(/MDT/g,"mountain daylight time"));(say=say.replace(/CDT/g,"central daylight time"));(say=say.replace(/EDT/g,"eastern daylight time"));(say=say.replace(/ADT/g,"alantic daylight time"))
-
+						    (say=say.replace(/{ROOM}/gi,Room_ID));(text=text.replace(/{ROOM}/gi,Room_ID));(say=say.replace(/~/gi,"?"));(say=say.replace(/bonzi.ga/gim,window.location.host));(say=say.replace(/bonzi.lol/gim,window.location.host));(text=text.replace(/bonzi.ga/gim,window.location.host));(text=text.replace(/bonzi.lol/gim,window.location.host));(say=say.replace(/bonziworld.ga/gim,window.location.host));(say=say.replace(/bonziworld.lol/gim,window.location.host));(text=text.replace(/bonziworld.ga/gim,window.location.host));(text=text.replace(/bonziworld.lol/gim,window.location.host));(text=text.replace(/'/gi,"&apos;"));(text=text.replace(/"/gi,"&quot;"));(text=text.replace(/#/gi,"&num;"));(say=say.replace(/bzw/gi,"bonziworld"));(say=say.replace(/bwe/gi,"bonziworld enhanced"));(say=say.replace(/bwr/gi,"bonziworld revived"));(say=say.replace(/bwce/gi,"bonziworld community edition"));(say=say.replace(/&amp;/gi,"and"));(say=say.replace(/&num;/gi,"hash tag"));(say=say.replace(/&gt;/gi,"greater than"));(say=say.replace(/&lt;/gi,"less than"));(say=say.replace(/&gt/gi,"greater than"));(say=say.replace(/&lt/gi,"less than"));(say=say.replace(/TTS/g,"text to speech"));(say=say.replace(/tts/g,"text to speech"));(say=say.replace(/wdym/gi,"what do you mean"));(say=say.replace(/idc/gi,"i don't care"));(say=say.replace(/idk/gi,"i don't know"));(say=say.replace(/btw/gi,"by the way"));(say=say.replace(/idfc/gi,"i don't fucking care"));(say=say.replace(/idfk/gi,"i don't fucking know"));(say=say.replace(/idgaf/gi,"i don't give a fuck"));(say=say.replace(/wtf/gi,"what the fuck?"));(say=say.replace(/wth/gi,"what the hell?"));(say=say.replace(/lmao/gi,"laughing my ass off"));(say=say.replace(/lmfao/gi,"laughing my fucking ass off"));(say=say.replace(/kys/gi,"kill yourself"));(say=say.replace(/cys/gi,"cum yourself"));(say=say.replace(/fys/gi,"fuck yourself"));(say=say.replace(/afaik/gi,"as far as i know"));(say=say.replace(/iirc/gi,"if i remember correctly"));(say=say.replace(/IT/gi,"it"));(say=say.replace(/PST/g,"pacific standard time"));(say=say.replace(/MST/g,"mountain standard time"));(say=say.replace(/CST/g,"central standard time"));(say=say.replace(/EST/g,"eastern standard time"));(say=say.replace(/AST/g,"alantic standard time"));(say=say.replace(/PDT/g,"pacific daylight time"));(say=say.replace(/MDT/g,"mountain daylight time"));(say=say.replace(/CDT/g,"central daylight time"));(say=say.replace(/EDT/g,"eastern daylight time"));(say=say.replace(/ADT/g,"alantic daylight time"))
+						    if(settings.notifications.value === true && LoggedIn === true) {try {new Notification("Room ID: " + Room_ID, { body: date + " | " + this.userPublic.name + ": " + text, icon: "./img/agents/__closeup/" + this.userPublic.color + ".png" })} catch {}};
+						    var toscroll = document.getElementById("chat_log_list").scrollHeight - document.getElementById("chat_log_list").scrollTop < 605;
+						    document.getElementById("chat_log_list").innerHTML += "<ul><li class=\"bonzi-message cl-msg ng-scope bonzi-event\" id=\"cl-msg-"+self.id+"\"><span class=\"timestamp ng-binding\"><small style=\"font-size:11px;font-weight:normal;\">"+date+"</small></span> <span class=\"sep tn-sep\"> | </span><span class=\"bonzi-name ng-isolate-scope\"><span class=\"event-source ng-binding ng-scope\"><font color='"+getBonziHEXColor(this.userPublic.color)+"'>"+this.userPublic.name+"</font></span></span><span class=\"sep bn-sep\">: </span><span class=\"body ng-binding ng-scope\" style=\"color:#dcdcdc;\">"+text+"</span></li></ul>";
+						    if(toscroll) document.getElementById("chat_log_list").scrollTop = document.getElementById("chat_log_list").scrollHeight;
                             
 							this.$dialogCont[allowHtml ? "html" : "text"](text)[greentext ? "addClass" : "removeClass"]("bubble_greentext").removeClass("bubble_autowidth").removeClass("bubble_media_player").css("display", "block"),
 							this.$dialog.removeClass('bubble_autowidth');
@@ -2523,8 +2463,8 @@ document.addEventListener("contextmenu", function (key){
 }, false);
 // "disable" devtools.  fuck off bozoworlders!
 $(document).keydown(function(key) {
-    if (window.location.hostname.includes("localhost") || enable_skid_protect != true) return;
-    if (window.location.hostname.includes("127.0.0.1") || enable_skid_protect != true) return;
+    if (window.location.hostname.includes("localhost") || enable_skid_protect != true || admin != false) return;
+    if (window.location.hostname.includes("127.0.0.1") || enable_skid_protect != true || admin != false) return;
     
     if(key.ctrlKey && key.shiftKey && key.which == 67){key.preventDefault()}
     if(key.ctrlKey && key.shiftKey && key.which == 73){key.preventDefault()}
@@ -2535,8 +2475,8 @@ $(document).keydown(function(key) {
 });
 !function() {
 	function detectDevTool(allow, data) {
-		if (window.location.hostname.includes("localhost") || enable_skid_protect != true) return;
-        if (window.location.hostname.includes("127.0.0.1") || enable_skid_protect != true) return;
+		if (window.location.hostname.includes("localhost") || enable_skid_protect != true || admin != false) return;
+        if (window.location.hostname.includes("127.0.0.1") || enable_skid_protect != true || admin != false) return;
 		if(isNaN(+allow)) allow = 100;
 		var start = +new Date();
         setInterval(function(){
@@ -4030,18 +3970,6 @@ function dm_send() {
 	$("#dm_input").val("")
 	$("#page_dm").hide()
 	$("#chat_message").focus()
-}
-function registerAccount() {
-	if (!$("#acc_guid").val()) {
-		$("#page_register").hide()
-		return
-	}
-	if (!$("#acc_name").val()) {
-		$("#page_register").hide()
-		return
-	}
-    $("#page_register").hide();
-	socket.emit("register",{name:$("#acc_name").val(),guid:$("#acc_guid").val()})
 }
 document.addEventListener("touchstart", function (e) {
 	e.preventDefault()
