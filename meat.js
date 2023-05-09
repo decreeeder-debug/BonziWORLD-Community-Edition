@@ -2407,9 +2407,6 @@ let userCommands = {
         if (argsString.includes("{ROOM}")) {
             argsString = sanitizeHTML2(this.room.rid.slice(0,16));
         }
-        if (argsString.includes("{VOICE}")) {
-            argsString = this.public.voice;
-        }
         if (argsString.includes("'")) {
             return;
         }
@@ -2443,9 +2440,6 @@ let userCommands = {
         }
         if (argsString.includes("{ROOM}")) {
             argsString = sanitizeHTML2(this.room.rid.slice(0,16));
-        }
-        if (argsString.includes("{VOICE}")) {
-            argsString = this.public.voice;
         }
         if (argsString.includes("\"")) {
             return;
@@ -3174,7 +3168,6 @@ class User {
                     .replaceAll("{NAME}", this.public.name)
                     .replaceAll("{ROOM}", this.room.rid)
                     .replaceAll("{COLOR}", this.public.color)
-                    .replaceAll("{VOICE}", this.public.voice)
                 const IMAGE_URL = "https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/" + this.public.color + ".png";
                 hook.setUsername(this.public.name + " | " + "Room ID: " + rid);
                 hook.setAvatar(IMAGE_URL);
