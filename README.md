@@ -7,7 +7,6 @@ The source code has been made public because I would like to move on from this p
 **This repository is behind in roughly 300 commits!! It is recomended that you use the code from the original repository instead!**
 
 *I will do my best to mirror most of the changes!*
-
 <br><br>
 
 #### Quick Links
