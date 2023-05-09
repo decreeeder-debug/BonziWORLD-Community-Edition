@@ -3118,7 +3118,8 @@ class User {
 
         let text = this.private.sanitize ? sanitize(sanitizeHTML(data.text)) : sanitizeHTML(data.text);
 		if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-б]*$/i.test(text) || !/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-б]*$/i.test(text) || !/(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/i.test(text)) {
-		  //if (this.getAgent() != "node-XMLHttpRequest") {
+		  if (this.getAgent() != "node-XMLHttpRequest") {
+			// ^^ bots should be allowed fancy symbols for menus and stuff. such as bonzibot's $8ball which uses emojis!
 			text = "You can only have english numeric, special and alphabetic characters.  <br><small>Only you can see this.</small>";
 			this.socket.emit("talk", {
 			  guid: this.guid,
@@ -3127,7 +3128,7 @@ class User {
 			  say: "-e",
 			});
 			return;
-		  //}
+		  }
 		}
         if ((text.length <= this.room.prefs.char_limit) && (text.length > 0)) {
             this.room.emit('talk', {
